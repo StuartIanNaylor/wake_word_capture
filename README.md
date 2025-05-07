@@ -30,4 +30,8 @@ pcm.vlevel {
 0.8 = strength
 10 = max multiply
 
-python3 kws-non-stream.py
+`python3 kws-non-stream.py -l` to list devices.
+
+Just a rough hack but if you look at the recorded .wav on KW hit 'Hey Jarvis' you will find its very constant and always in the middle so the capture window can be decresed to quite a tight fit.
+Currently double just to show any large movements
+
