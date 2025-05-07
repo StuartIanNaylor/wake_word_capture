@@ -19,7 +19,6 @@ parser.add_argument('--noise_index', type=int, default=1, help='noise label inde
 parser.add_argument('--kw_sensitivity', type=float, default=0.10, help='kw_sensitivity default=0.70')
 parser.add_argument('--list_devices', help='list input devices', action="store_true")
 parser.add_argument('--noise_sensitivity', type=float, default=0.90, help='noise_sensitivity default=0.90')
-parser.add_argument('--debug', help='debug effect settings to cli', action="store_true")
 args = parser.parse_args()
  
 if args.list_devices:
@@ -39,7 +38,7 @@ if args.device:
 #import tflite_runtime.interpreter as tflite
 import tensorflow as tf
 
-blocksize = sample_rate * args.kw_length
+blocksize = int(sample_rate * args.kw_length)
 stride = args.window_stride
 stride_length = int(sample_rate * stride)
 strides = int(blocksize * stride) 
@@ -60,7 +59,7 @@ for s in range(len(input_details)):
   inputs.append(np.zeros(input_details[s]['shape'], dtype=np.float32))
   
 reset_count = 0
-audio_buffer = np.zeros((1, strides * 2), dtype=np.float32)
+audio_buffer = np.zeros((1, blocksize * 2), dtype=np.float32)
   
 def sd_callback(rec, frames, ftime, status):
      
@@ -77,7 +76,7 @@ def sd_callback(rec, frames, ftime, status):
     else:
       rec = np.reshape(rec, (1, stride_length))
       audio_buffer = np.roll(audio_buffer, -stride_length)
-      audio_buffer[0,(strides * 2) - stride_length:strides * 2] = rec[0,:]
+      audio_buffer[0,(blocksize * 2) - stride_length:blocksize * 2] = rec[0,:]
 
 
     # Make prediction from model
