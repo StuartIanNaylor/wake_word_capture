@@ -45,3 +45,12 @@ Maybe because I have always used a running average than actual model output is t
 Maybe if MicroWakeWord is using few strides and polling slowing and not averaging model output that is why.
 The non streaming model sort of sucks to a streaming model as 20ms strides with a streaming model causes considerabilly less load.
 
+I dunno about the numpy.ma but hey as I did have
+```
+def moving_average(a, n=3) :
+    ret = np.cumsum(a, dtype=float)
+    ret[n:] = ret[n:] - ret[:-n]
+    return ret[n - 1:] / n
+```
+also was doing it over declared strides of 30 before.
+I am terrible for hacking and changing and never keeping old and the code is not proposed but to demonstrate in a hour or so you can have something.
