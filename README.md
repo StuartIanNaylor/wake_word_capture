@@ -54,3 +54,9 @@ def moving_average(a, n=3) :
 ```
 also was doing it over declared strides of 30 before.
 I am terrible for hacking and changing and never keeping old and the code is not proposed but to demonstrate in a hour or so you can have something.
+
+Either way with an avg or just 1st prob hit the capture point is very consistant.
+I never bothered to create and upload the 1st hit for non-stream as sure it will be the same.
+I need to add a delay on the capture point and squeeze in on the 'Hey Jarvis' but that doesn't matter.
+If the timing is consistant it means you can.
+
