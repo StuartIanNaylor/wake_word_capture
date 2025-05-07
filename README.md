@@ -35,3 +35,13 @@ pcm.vlevel {
 Just a rough hack but if you look at the recorded .wav on KW hit 'Hey Jarvis' you will find its very constant and always in the middle so the capture window can be decresed to quite a tight fit.
 Currently double just to show any large movements
 
+I normally use a streaming model but just did the non stream 1st and will update repo later but included as think MicroWake is also no streaming.
+On a Pi Zero you have to use the quant model if strides set to 40
+Interesting is that if you say just Hey and drop the sensitivity to 0.1 the quant model will trigger but unquant will not
+That is more inaccuracy than I thought quant created...
+
+Maybe because I have always used a running average than actual model output is the secret sauce? But capture should be easy as the capture position is very constant.
+
+Maybe if MicroWakeWord is using few strides and polling slowing and not averaging model output that is why.
+The non streaming model sort of sucks to a streaming model as 20ms strides with a streaming model causes considerabilly less load.
+
