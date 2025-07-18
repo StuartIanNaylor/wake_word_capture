@@ -12,7 +12,7 @@ very easy just
 make
 sudo make install
 ```
-Might need to create the ladspa dir if not exist
+Might need to create the ladspa dir if not exist /usr/lib/ladspa/ usually
 ```
 pcm.vlevel {
     type ladspa
