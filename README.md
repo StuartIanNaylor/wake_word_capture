@@ -60,6 +60,7 @@ cd wake_word_capture
 python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 pip3 install --upgrade pip
+pip install tensorflow==2.11.1 sounddevice
 ```
 
 `python3 kws-non-stream-avg.py -l` to list devices.
