@@ -69,4 +69,5 @@ Currently double just to show any large movements
 
 I am terrible for slack hacking and changing and never keeping old and the code is not proposed but to demonstrate in a hour or so you can have something.
 Make sure you have the correct sound card `aplay - l` test the volume `arecord -D plughw:idx -f S16_LE -r 16000 -c1 -V mono test.wav` to view the VU.
-Copy the test.wav and have a look at it in Audacity (or other audio editor) to check you are getting a good level without clipping
+Copy the test.wav and have a look at it in Audacity (or other audio editor) to check you are getting a good level without clipping.
+The model is trained with variation gain from 0.65 to -0.1 db but some mics have terrible gain and will cause problems if not setup correctly `alsamixer` F5 for include mic settings
