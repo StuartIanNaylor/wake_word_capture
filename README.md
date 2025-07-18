@@ -51,31 +51,13 @@ pip3 install --upgrade pip
 
 `python3 kws-non-stream-avg.py -l` to list devices.
 
-Just a rough hack but if you look at the recorded .wav on KW hit 'Hey Jarvis' you will find its very constant and always in the middle so the capture window can be decresed to quite a tight fit.
+Just a rough hack but if you look at the recorded .wav on KW hit 'Computer' you will find its very constant and always in the middle so the capture window can be decresed to quite a tight fit.
 Currently double just to show any large movements
 
-I normally use a streaming model but just did the non stream 1st and will update repo later but included as think MicroWake is also no streaming.
-On a Pi Zero you have to use the quant model if strides set to 40
-Interesting is that if you say just Hey and drop the sensitivity to 0.1 the quant model will trigger but unquant will not
-That is more inaccuracy than I thought quant created...
-
-Maybe because I have always used a running average than actual model output is the secret sauce? But capture should be easy as the capture position is very constant.
-
-Maybe if MicroWakeWord is using few strides and polling slowing and not averaging model output that is why.
-The non streaming model sort of sucks to a streaming model as 20ms strides with a streaming model causes considerabilly less load.
-
-I dunno about the numpy.ma but hey as I did have
-```
-def moving_average(a, n=3) :
-    ret = np.cumsum(a, dtype=float)
-    ret[n:] = ret[n:] - ret[:-n]
-    return ret[n - 1:] / n
-```
-also was doing it over declared strides of 30 before.
-I am terrible for hacking and changing and never keeping old and the code is not proposed but to demonstrate in a hour or so you can have something.
+I am terrible for round hacking and changing and never keeping old and the code is not proposed but to demonstrate in a hour or so you can have something.
 
 Either way with an avg or just 1st prob hit the capture point is very consistant.
 I never bothered to create and upload the 1st hit for non-stream as sure it will be the same.
-I need to add a delay on the capture point and squeeze in on the 'Hey Jarvis' but that doesn't matter.
+I need to add a delay on the capture point and squeeze in on the 'Computer' but that doesn't matter.
 If the timing is consistant it means you can.
 
