@@ -44,7 +44,7 @@ take a while as will compile python 3.10.18 but just me I like the native compil
 helps if you install https://github.com/StuartIanNaylor/zram-swap-config and increase your dphys swap file to stop a OOM but on a Pizero2 eventually...
 can not remember if you need to install libs
 ```
-sudo apt install build-essential zlib1g-dev  libncurses5-dev libgdbm-dev libnss3-dev  libssl-dev libreadline-dev libffi-dev curl
+sudo apt install build-essential zlib1g-dev  libncurses5-dev libgdbm-dev libnss3-dev  libssl-dev libreadline-dev libffi-dev curl autotools-dev autoconf libtool pkg-config cmake
 ```
 Likely but any version of TF should run if used with the correct version of numpy the 1. version of numpy was used but latter use the later 2. version
 These instructions are just the same to run and create models via https://github.com/google-research/google-research/tree/1d49f2c0d5506a6e11115726164d42f6b7b7b95a/kws_streaming
