@@ -40,6 +40,7 @@ pyenv global 3.10.18
 python --version #to test
 python global system #to switch back to system python version
 ```
+take a while as will compile python 3.10.18 but just me I like the native compile version to be avail
 ```
 git clone https://github.com/StuartIanNaylor/wake_word_capture.git
 cd wake_word_capture
