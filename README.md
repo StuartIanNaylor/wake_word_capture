@@ -36,8 +36,8 @@ use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get 
 great simple util for changing python version
 ```
 pyenv install -list
-pyenv install 3.10.18
-pyenv global 3.10.18
+pyenv install 3.8.20
+pyenv global 3.8.20
 python --version #to test
 python global system #to switch back to system python version
 ```
