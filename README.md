@@ -50,7 +50,7 @@ autotools-dev autoconf libtool pkg-config cmake python3-setuptools python3-wheel
 ```
 Likely but any version of TF should run if used with the correct version of numpy the 1. version of numpy was used but latter use the later 2. version
 These instructions are just the same to run and create models via https://github.com/google-research/google-research/tree/1d49f2c0d5506a6e11115726164d42f6b7b7b95a/kws_streaming
-Which I have had problems not being to run much past that commit or anything later than pip install tensorflow==2.11.1 but cling to that branch works as how we got these models.
+Which I have had problems not being to run much past that commit or anything later than pip install tensorflow==2.11.1 but cloning to that branch works as how we got these models.
 Its a shame as it just creates a hurdle but once you know to checkout that commit and that version of tensorflow than what are now lost in time tf_nightly refernces its a great framework to test basic models.
 The python/tf version and pyenv are only really needed if you want to try creating models
 
