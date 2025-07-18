@@ -46,7 +46,10 @@ can not remember if you need to install libs
 ```
 sudo apt install build-essential zlib1g-dev \ libncurses5-dev libgdbm-dev libnss3-dev \ libssl-dev libreadline-dev libffi-dev curl
 ```
-Likely
+Likely but any version of TF should run if used with the correct version of numpy the 1. version of numpy was used but latter use the later 2. version
+These instructions are just the same to run and create models via https://github.com/google-research/google-research/tree/1d49f2c0d5506a6e11115726164d42f6b7b7b95a/kws_streaming
+Which I have had problems not being to run much past that commit or anything later than pip install tensorflow==2.11.1 but cling to that branch works as how we got these models.
+Its a shame as it just creates a hurdle but once you know to checkout that commit and that version of tensorflow than what are now lost in time tf_nightly refernces its a great framework to test basic models.
 
 ```
 git clone https://github.com/StuartIanNaylor/wake_word_capture.git
