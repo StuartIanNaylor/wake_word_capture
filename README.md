@@ -32,7 +32,7 @@ pcm.vlevel {
 ```
 https://github.com/radiocicletta/vlevel/blob/master/docs/technical.txt goes into the internals if curious
 
-use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10
+use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.8
 great simple util for changing python version
 ```
 pyenv install -list
