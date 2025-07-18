@@ -42,6 +42,12 @@ python global system #to switch back to system python version
 ```
 take a while as will compile python 3.10.18 but just me I like the native compile version to be avail
 helps if you install https://github.com/StuartIanNaylor/zram-swap-config and increase your dphys swap file to stop a OOM but on a Pizero2 eventually...
+can not remember if you need to install libs
+```
+sudo apt install build-essential zlib1g-dev \ libncurses5-dev libgdbm-dev libnss3-dev \ libssl-dev libreadline-dev libffi-dev curl
+```
+Likely
+
 ```
 git clone https://github.com/StuartIanNaylor/wake_word_capture.git
 cd wake_word_capture
