@@ -21,14 +21,14 @@ pcm.vlevel {
     plugins [{
         label vlevel_stereo
         input {
-            controls [ 0.2 0.8 10 ]
+            controls [ 0.2 0.8 20 ]
         }
     }]
 }
 
 0.2 = monitor buffer secs
 0.8 = strength
-10 = max multiply
+20 = max multiply
 ```
 
 use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10
