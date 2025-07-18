@@ -13,7 +13,7 @@ make
 sudo make install
 ```
 Might need to create the ladspa dir if not exist
-
+```
 pcm.vlevel {
     type ladspa
     slave.pcm "plughw:1";
@@ -29,6 +29,24 @@ pcm.vlevel {
 0.2 = monitor buffer secs
 0.8 = strength
 10 = max multiply
+```
+
+use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10
+great simple util for changing python version
+```
+pyenv install -list
+pyenv install 3.10.18
+pyenv global 3.10.18
+python --version #to test
+python global system #to switch back to system python version
+```
+```
+git clone https://github.com/StuartIanNaylor/wake_word_capture.git
+cd wake_word_capture
+python3 -m venv --system-site-packages ./venv
+source ./venv/bin/activate
+pip3 install --upgrade pip
+```
 
 `python3 kws-non-stream-avg.py -l` to list devices.
 
