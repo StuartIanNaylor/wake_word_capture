@@ -39,7 +39,8 @@ pyenv install -list
 pyenv install 3.8.20
 pyenv global 3.8.20
 python --version #to test
-python global system #to switch back to system python version
+pyenv global system #to switch back to system python version
+pyenv versions #to view installed versions
 ```
 take a while as will compile python 3.10.18 but just me I like the native compile version to be avail under pyenv
 helps if you install https://github.com/StuartIanNaylor/zram-swap-config and increase your dphys swap file to stop a OOM but on a Pizero2 eventually...
