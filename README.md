@@ -60,7 +60,7 @@ cd wake_word_capture
 python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 pip3 install --upgrade pip
-pip install tensorflow==2.11.1 sounddevice
+pip install tensorflow==2.11.0 sounddevice numpy==1.26.4
 ```
 
 `python3 kws-non-stream-avg.py -l` to list devices.
@@ -129,7 +129,7 @@ crnn \
 ```
 Then after doing the same install of python 3.8
 ```
-pip install tensorflow==2.11.1 tensorflow_addons tensorflow_model_optimization pydot graphviz absl-py
+pip install tensorflow==2.11.1 numpy==1.26.4 tensorflow_addons tensorflow_model_optimization pydot graphviz absl-py
 source crnn-state
 ```
 Likey you will want to change your dataset organisation but the above will let you do your own augmentation
