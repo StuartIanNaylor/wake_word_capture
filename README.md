@@ -32,12 +32,12 @@ pcm.vlevel {
 ```
 https://github.com/radiocicletta/vlevel/blob/master/docs/technical.txt goes into the internals if curious
 
-use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.8
+use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10
 great simple util for changing python version
 ```
 pyenv install -list
-pyenv install 3.8.20
-pyenv global 3.8.20
+pyenv install 3.10.18
+pyenv global 3.10.18
 python --version #to test
 pyenv global system #to switch back to system python version
 pyenv versions #to view installed versions
@@ -128,7 +128,7 @@ crnn \
 --act1 "'linear','relu'" \
 --stateful 1
 ```
-Then after doing the same install of python 3.8
+Then after doing the same install of python 3.10
 ```
 pip install tensorflow==2.11.1 numpy==1.26.4 tensorflow_addons tensorflow_model_optimization pydot graphviz absl-py
 source crnn-state
