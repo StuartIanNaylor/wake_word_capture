@@ -71,4 +71,68 @@ Currently double just to show any large movements
 I am terrible for slack hacking and changing and never keeping old and the code is not proposed but to demonstrate in a hour or so you can have something.
 Make sure you have the correct sound card `aplay - l` test the volume `arecord -D plughw:idx -f S16_LE -r 16000 -c1 -V mono test.wav` to view the VU.
 Copy the test.wav and have a look at it in Audacity (or other audio editor) to check you are getting a good level without clipping.
+
+if you want to create your own models
+```
+mkdir gkws
+cd gkws
+git clone https://github.com/google-research/google-research.git
+cd google-research
+git checkout git checkout fa08dcc009c73c516400dc32e13147b14196becc
+```
+instructions are at https://github.com/google-research/google-research/blob/master/kws_streaming/experiments/kws_experiments_quantized_12_labels.md but here is my setup
+```
+KWS_PATH=$PWD
+DATA_PATH=$KWS_PATH/data2
+MODELS_PATH=$KWS_PATH/models2
+CMD_TRAIN="python -m kws_streaming.train.model_train_eval"
+```
+for the example crnn-state in this repo examples save this as a file called crnn-state
+```
+$CMD_TRAIN \
+--data_url '' \
+--data_dir $DATA_PATH/ \
+--train_dir $MODELS_PATH/crnn_state/ \
+--split_data 0 \
+--wanted_words kw,likekw,notkw,noise \
+--mel_upper_edge_hertz 7600 \
+--how_many_training_steps 20000,20000,20000,20000 \
+--learning_rate 0.001,0.0005,0.0001,0.00002 \
+--window_size_ms 40.0 \
+--window_stride_ms 20.0 \
+--mel_num_bins 40 \
+--dct_num_features 20 \
+--resample 0.0 \
+--alsologtostderr \
+--train 1 \
+--lr_schedule 'exp' \
+--use_spec_augment 1 \
+--time_masks_number 2 \
+--time_mask_max_size 10 \
+--frequency_masks_number 2 \
+--frequency_mask_max_size 5 \
+--feature_type 'mfcc_op' \
+--fft_magnitude_squared 1 \
+crnn \
+--cnn_filters '16,16' \
+--cnn_kernel_size '(3,3),(5,3)' \
+--cnn_act "'relu','relu'" \
+--cnn_dilation_rate '(1,1),(1,1)' \
+--cnn_strides '(1,1),(1,1)' \
+--gru_units 256 \
+--return_sequences 0 \
+--dropout1 0.1 \
+--units1 '128,256' \
+--act1 "'linear','relu'" \
+--stateful 1
+```
+Then after doing the same install of python 3.8
+```
+pip install tensorflow==2.11.1 tensorflow_addons tensorflow_model_optimization pydot graphviz absl-py
+source crnn-state
+```
+Likey you will want to change your dataset organisation but the above will let you do your own augmentation
+Further instructions https://github.com/google-research/google-research/tree/master/kws_streaming#training-on-custom-data
+
+
 The model is trained with variation gain from 0.65 to -0.1 db but some mics have terrible gain and will cause problems if not setup correctly `alsamixer` F5 to include mic settings
