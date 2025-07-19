@@ -47,7 +47,8 @@ helps if you install https://github.com/StuartIanNaylor/zram-swap-config and inc
 can not remember if you need to install libs
 ```
 sudo apt install build-essential zlib1g-dev  libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev curl \
-autotools-dev autoconf libtool pkg-config cmake python3-setuptools python3-wheel libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev tk-dev 
+autotools-dev autoconf libtool pkg-config cmake python3-setuptools python3-wheel libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev tk-dev \
+libportaudio2
 ```
 Likely but any version of TF should run if used with the correct version of numpy the 1. version of numpy was used but latter use the later 2. version
 These instructions are just the same to run and create models via https://github.com/google-research/google-research/tree/1d49f2c0d5506a6e11115726164d42f6b7b7b95a/kws_streaming
@@ -61,7 +62,7 @@ cd wake_word_capture
 python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 pip3 install --upgrade pip
-pip install tensorflow==2.11.0 sounddevice numpy==1.26.4
+pip install tensorflow==2.11.0 sounddevice numpy==1.26.4 scipy
 ```
 
 `python3 kws-non-stream-avg.py -l` to list devices.
