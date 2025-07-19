@@ -135,4 +135,6 @@ source crnn-state
 Likey you will want to change your dataset organisation but the above will let you do your own augmentation
 Further instructions https://github.com/google-research/google-research/tree/master/kws_streaming#training-on-custom-data
 Medium to large datasets can take 24 hours with a decent machine Cuda and a GTX 2070+
+The learning rate starts very small to likely stop any overshoots so all models benchmarked get the optimum model.
+this does increase training time that really many could run with bigger LR (learning rates)
 
