@@ -68,6 +68,7 @@ pip install tensorflow==2.11.0 sounddevice numpy==1.26.4 scipy
 `python3 kws-non-stream-avg.py -l` to list devices.
 `python kws-stream-avg.py --help` to show params
 `python kws-stream-avg.py --device 0 --kw_length 1.0 --kw_index 0 --noise_index 3` for current model
+You might get a buffer under run as the full TF package loads just ignore but runtime is much lighter.
 
 
 Just a rough hack but if you look at the recorded .wav on KW hit 'Computer' you will find its very constant and always in the middle so the capture window can be decresed to quite a tight fit.
