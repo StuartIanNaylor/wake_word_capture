@@ -120,6 +120,7 @@ $CMD_TRAIN \
 --frequency_mask_max_size 5 \
 --feature_type 'mfcc_op' \
 --fft_magnitude_squared 1 \
+--return_softmax 1 \
 crnn \
 --cnn_filters '16,16' \
 --cnn_kernel_size '(3,3),(5,3)' \
