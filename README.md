@@ -12,7 +12,7 @@ very easy just
 make
 sudo make install
 ```
-Might need to create the ladspa dir if not exist /usr/lib/ladspa/ usually
+Might need to create the ladspa dir if not exist /usr/lib/ladspa/ usually and sudo apt install libjack-jackd2-dev
 ```
 pcm.vlevel {
     type ladspa
