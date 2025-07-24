@@ -145,3 +145,8 @@ Medium to large datasets can take 24 hours with a decent machine Cuda and a GTX 
 The learning rate starts very small to likely stop any overshoots so all models benchmarked get the optimum model.
 this does increase training time that really many could run with bigger LR (learning rates)
 
+Added 2 scripts create_prob_txt.py allow you to output the score of a data dir on a selected trained model index.
+Creates a txt file that is useful for quick analysis in a spreadsheet.
+Often I just sort keeep the worst ofenders and save to use with the del-prob-csv.py script to delete outliers likely from bad TTS or noise files.
+Usually the data dir is of the index but cross runs of how its seen by other classes can be illuminating.
+
