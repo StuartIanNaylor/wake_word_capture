@@ -31,6 +31,8 @@ pcm.vlevel {
 20 = max multiply
 ```
 https://github.com/radiocicletta/vlevel/blob/master/docs/technical.txt goes into the internals if curious
+Really the input should be post filtering of something like https://github.com/SaneBow/PiDTLN
+Still though filtering can attenuate in expects 0.7 to 1 for optimum input tolerance so a 2 stage AGC can be beneficial of running vlevel twice
 
 use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10
 great simple util for changing python version
