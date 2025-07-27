@@ -152,3 +152,5 @@ Creates a txt file that is useful for quick analysis in a spreadsheet.
 Often I just sort keeep the worst ofenders and save to use with the del-prob-csv.py script to delete outliers likely from bad TTS or noise files.
 Usually the data dir is of the index but cross runs of how its seen by other classes can be illuminating.
 
+BcResNet models are from https://github.com/Qualcomm-AI-research/bcresnet and likely would be better converted from pytorch to Onnx and then maybe via RkNN or https://github.com/espressif/esp-dl depending on NPU or Esp32
+
