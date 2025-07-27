@@ -41,10 +41,11 @@ import tensorflow as tf
 blocksize = int(sample_rate * args.kw_length)
 stride = args.window_stride
 stride_length = int(sample_rate * stride)
-strides = int(blocksize * stride) 
+strides = int(args.kw_length / stride) 
 kw_index = args.kw_index
 noise_index = args.noise_index
-kw_averages = np.zeros((1, int(strides / 8)), dtype=np.float32)
+print(strides)
+kw_averages = np.zeros((1, strides), dtype=np.float32)
 kw_sensitivity = args.kw_sensitivity
 kw_max_avg = 0
 # Load the TFLite model and allocate tensors.
@@ -73,6 +74,7 @@ def sd_callback(rec, frames, ftime, status):
     if reset_count > 0:
       reset_count -= 1
       rec = np.zeros((1, stride_length), dtype=np.float32)
+      print(reset_count)
     else:
       rec = np.reshape(rec, (1, stride_length))
       audio_buffer = np.roll(audio_buffer, -stride_length)
@@ -95,7 +97,7 @@ def sd_callback(rec, frames, ftime, status):
 
 
     kw_averages = np.roll(kw_averages, -1)
-    kw_averages[0, int(strides / 8) - 1] = output_data[0][0]
+    kw_averages[0, strides - 1] = output_data[0][0]
     kw_avg = np.ma.average(kw_averages, axis=1)[0]
     
     if kw_avg > kw_sensitivity:
@@ -105,7 +107,7 @@ def sd_callback(rec, frames, ftime, status):
         reset_count = int(strides / 2) + 1
         print(kw_max_avg)
         kw_max_avg = 0
-        kw_averages = np.zeros((1, int(strides /8)), dtype=np.float32)
+        kw_averages = np.zeros((1, strides), dtype=np.float32)
         for s in range(len(input_details)):
           inputs.append(np.zeros(input_details[s]['shape'], dtype=np.float32))
         wavfile.write(str(uuid.uuid4()) + ".wav", sample_rate, audio_buffer[0][:])
