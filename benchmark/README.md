@@ -13,3 +13,4 @@ Doing this has prompted me to to create a '2syl' class as 'future' and similar w
 Prob could modify the LikeKw classes but now wondering why I never produced a 2syl class.
 Under inspection the sylable code is picking up 'future' as 3 sylable so would niether end up in 2syl or the current 'lk_er' view
 I am just going to run some updates to fix the database by hand and this is a ToDo and sylable matching.
+https://github.com/sloev/spacy-syllables might be a better option than NLTK code used
