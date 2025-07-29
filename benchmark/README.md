@@ -11,3 +11,5 @@ Using ALSA would make in realtime sox norm also isn't comparitive as the recordi
 Its a good tool still though to see what word and typr of words are creating false positives.
 Doing this has prompted me to to create a '2syl' class as 'future' and similar words are obviously closer to 'KW' from results.
 Prob could modify the LikeKw classes but now wondering why I never produced a 2syl class.
+Under inspection the sylable code is picking up 'future' as 3 sylable so would niether end up in 2syl or the current 'lk_er' view
+I am just going to run some updates to fix the database by hand and this is a ToDo and sylable matching.
