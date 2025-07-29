@@ -1,0 +1,13 @@
+# benchmark
+
+wget https://www.openslr.org/resources/12/train-clean-100.tar.gz
+tar -xvzf train-clean-100.tar.gz
+pip install soundfile scipy
+
+`python benchmark_clean.py --libri-dir /LibriSpeech/train-clean-100`
+
+Still trying to work out a way to match the AGC input that should make sure input fits the 0.7 - 1.0 training levels.
+Using ALSA would make in realtime sox norm also isn't comparitive as the recordings are long term but have spurious peaks that still means the RMS level is below expected.
+Its a good tool still though to see what word and typr of words are creating false positives.
+Doing this has prompted me to to create a '2syl' class as 'future' and similar words are obviously closer to 'KW' from results.
+Prob could modify the LikeKw classes but now wondering why I never produced a 2syl class.
