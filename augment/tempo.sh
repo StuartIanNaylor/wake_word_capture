@@ -9,7 +9,7 @@ for file in $(find . -name "*.wav"); do
     #deepFilter "$filename".wav --no-suffix
     #sox /tmp/tempfile.wav "$filename".wav silence 1 0.2 1%
     #sox /tmp/tempfile.wav "$filename".wav tempo 1.1
-    sox /tmp/tempfile.wav "$filename".wav silence 1 0.2 0.1% 1 0.2 1%
+    #sox /tmp/tempfile.wav "$filename".wav silence 1 0.2 0.1% 1 0.2 1%
 
 done
 
