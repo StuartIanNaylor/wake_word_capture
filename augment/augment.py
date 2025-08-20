@@ -36,7 +36,7 @@ def augment(source_dir, dest_dir, target_qty, target_length, debug, noise_dir, n
   source_qty = len(samples)
   noise_samples = glob.glob(os.path.join(noise_dir, '*.wav'))
   noise_qty = len(noise_samples)  
-  loop_qty = int(target_qty / source_qty)
+  loop_qty = math.ceil(target_qty / source_qty)
   #print(source_qty, noise_qty, loop_qty)
   if source_qty < 1:
     print("No source files found *.wav")
@@ -55,8 +55,6 @@ def augment(source_dir, dest_dir, target_qty, target_length, debug, noise_dir, n
   cfg.read('effects.ini')
   
   count = 0 
-  if loop_qty == 0:
-    loop_qty = 1
   for _ in range(loop_qty):
     for target_wav in samples:
       if os.path.splitext(target_wav)[1] == ".wav":
@@ -196,9 +194,9 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
     audio_data = audio_data.astype(np.float64)
     rir_data = RIRs.astype(np.float64)
     #print(RIRs.shape, audio_data.shape)
-
-    try:  
-        # Normalize the RIR
+    
+    if np.max(np.abs(rir_data)) != 0:
+        # Normalize the RIR    
         rir_data /= np.max(np.abs(rir_data))
         # Convolve the audio with the RIR
         convolved_audio = fftconvolve(audio_data, rir_data[0][0])
@@ -208,15 +206,12 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
         convolved_audio_int = (convolved_audio * 32767).astype(np.int16)
         # Save the new file
         wavfile.write('/tmp/sample.wav', sample_rate_audio, convolved_audio_int)
-    except ValueError:  
-        pass
     
     tfm1.clear_effects()
-    tfm1.silence(1, 0.1, 0.1)
-    tfm1.silence(-1, 0.1, 0.1)
+    tfm1.silence(1, 0.1, 0.05)
+    tfm1.silence(-1, 0.1, 0.05)
     array_out1 = tfm1.build_array(input_filepath='/tmp/sample.wav', sample_rate_in=sample_rate)
     tfm1.clear_effects()
-    tfm1.fade(fade_in_len=0.02, fade_out_len=0.02)
     jitter_length = jitter * random.random()
     if len(array_out1) <= target_samples:
       target_pad = ((target_samples - len(array_out1)) / 2) / sample_rate
@@ -287,8 +282,7 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
       rir_data = RIRs.astype(np.float64)
       #print(RIRs.shape, audio_data.shape)
   
-      try:
-          # Normalize the RIR
+      if np.max(np.abs(rir_data)) != 0:
           rir_data /= np.max(np.abs(rir_data))
           # Convolve the audio with the RIR
           convolved_audio = fftconvolve(audio_data, rir_data[0][0])
@@ -301,9 +295,7 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
           convolved_audio_int = (convolved_audio * 32767).astype(np.int16)
           # Save the new file
           wavfile.write('/tmp/noise.wav', sample_rate_audio, convolved_audio_int)
-          
-      except ValueError:  
-          pass   
+            
            
       noise_length = sox.file_info.duration('/tmp/noise.wav')
       tfm2.clear_effects()
