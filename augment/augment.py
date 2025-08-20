@@ -68,13 +68,14 @@ def augment(source_dir, dest_dir, target_qty, target_length, debug, noise_dir, n
 
 def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise_vol, noise_percent, min_vol, jitter):
 
-    rand_effect = random.random()
+    
     #wav_length = sox.file_info.duration(wav)
     target_samples = int(sample_rate * target_length)
     tfm1 = sox.Transformer()
     tfm1.clear_effects()
     tfm1.norm(-2)
     str_effect = ""
+    rand_effect = random.random()
     if rand_effect < 0.33:
       pitch = random.randrange(int(cfg['pitch']['n_semitones_min']), int(cfg['pitch']['n_semitones_max'])) / 1000
       tfm1.pitch(n_semitones=pitch)
@@ -106,13 +107,11 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
       tfm1.bass(gain_db=gain, frequency=freq, slope=slope)
       str_effect = str_effect + "-b"
            
-    #array_out1 = tfm1.build_array(input_filepath=wav, sample_rate_in=sample_rate)
-    tfm1.clear_effects()
     tfm1.build_file(input_filepath=wav, output_filepath='/tmp/sample.wav')
     
-    rwidth = random.randint(25, 100) / 10
-    rlength = random.randint(25, 100) / 10
-    rheight = random.randint(21, 30) / 10
+    rwidth = random.randint(250, 800) / 100
+    rlength = random.randint(250, 800) / 100
+    rheight = random.randint(210, 300) / 100
     room_sz = [rwidth,rlength,rheight] 
     nb_rcv = 1     
     
@@ -121,70 +120,70 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
         #leftwall
         #print("leftwall")
         orV_rcv = np.array([[1,0,0]])
-        mic_pattern = "homni"
-        rec_width = rwidth - (rwidth * (random.randint(95, 99) / 100))
-        rec_height = rheight - (rheight * (random.randint(40, 80) / 100))
-        rec_length = rlength - (rlength * (random.randint(30, 70) / 100))
+        mic_pattern = "omni"
+        rec_width = rwidth - (rwidth * (random.randint(950, 990) / 1000))
+        rec_height = rheight - (rheight * (random.randint(400, 800) / 1000))
+        rec_length = rlength - (rlength * (random.randint(300, 700) / 1000))
         pos_rcv = np.array([[rec_width, rec_length, rec_height]])
     elif reciever_type < 0.3:
         #rightwall
         #print("rightwall")
         orV_rcv = np.array([[-1,0,0]])
-        mic_pattern = "homni"
-        rec_width = rwidth - (rwidth * (random.randint(1, 5) / 100))
-        rec_height = rheight - (rheight * (random.randint(40, 80) / 100))
-        rec_length = rlength - (rlength * (random.randint(30, 70) / 100))
+        mic_pattern = "omni"
+        rec_width = rwidth - (rwidth * (random.randint(10, 50) / 1000))
+        rec_height = rheight - (rheight * (random.randint(400, 800) / 1000))
+        rec_length = rlength - (rlength * (random.randint(300, 700) / 1000))
         pos_rcv = np.array([[rec_width, rec_length, rec_height]])     
     elif reciever_type < 0.45:
         #frontwall
         #print("frontwall")
         orV_rcv = np.array([[0,1,0]])
-        mic_pattern = "homni"
-        rec_width = rwidth - (rwidth * (random.randint(30, 70) / 100))
-        rec_height = rheight - (rheight * (random.randint(30, 95) / 100))
-        rec_length = rlength - (rlength * (random.randint(1, 5) / 100))
+        mic_pattern = "omni"
+        rec_width = rwidth - (rwidth * (random.randint(300, 700) / 1000))
+        rec_height = rheight - (rheight * (random.randint(300, 950) / 1000))
+        rec_length = rlength - (rlength * (random.randint(10, 50) / 1000))
         pos_rcv = np.array([[rec_width, rec_length, rec_height]])
     elif reciever_type < 0.6:
         #ceilling
         #print("ceiling")
         orV_rcv = np.array([[0,0,-1]])
-        mic_pattern = "homni"
-        rec_width = rwidth - (rwidth * (random.randint(30, 70) / 100))
-        rec_height = rheight - (rheight * (random.randint(1, 5) / 100))
-        rec_length = rlength - (rlength * (random.randint(30, 70) / 100))
+        mic_pattern = "omni"
+        rec_width = rwidth - (rwidth * (random.randint(300, 700) / 1000))
+        rec_height = rheight - (rheight * (random.randint(10, 50) / 1000))
+        rec_length = rlength - (rlength * (random.randint(300, 700) / 1000))
         pos_rcv = np.array([[rec_width, rec_length, rec_height]])      
     else:
         #table
         #print("table")
         orV_rcv = np.array([[0,-1,0]])
         mic_pattern = "omni"
-        rec_width = rwidth - (rwidth * (random.randint(5, 95) / 100))
-        rec_height = rheight - (rheight * (random.randint(30, 70) / 100))
-        rec_length = rlength - (rlength * (random.randint(20, 80) / 100))
+        rec_width = rwidth - (rwidth * (random.randint(50, 950) / 1000))
+        rec_height = rheight - (rheight * (random.randint(300, 700) / 1000))
+        rec_length = rlength - (rlength * (random.randint(200, 800) / 1000))
         pos_rcv = np.array([[rec_width, rec_length, rec_height]])
             
     #print(pos_rcv, room_sz)
-    if (rwidth * rlength * rheight) > (7 * 7 * 2.6):
+    if (rwidth * rlength * rheight) > (6 * 6 * 2.6):
         #large
-        T60 = random.randint(30, 60) / 100
+        T60 = random.randint(400, 600) / 1000
         str_effect = str_effect + "-lrg" + str(T60)
     else:
         #small
-        T60 = random.randint(15, 35) / 100
+        T60 = random.randint(200, 400) / 1000
         str_effect = str_effect + "-sml" + str(T60)
         
     nb_src = 1
     orV_src = None
     spkr_pattern = "omni"
-    sourceheight = rheight - rheight * (random.randint(30, 70) / 100)    
+    sourceheight = rheight - rheight * (random.randint(300, 700) / 1000)    
     pos_src = np.array([[rwidth * random.random(),rlength * random.random(),sourceheight]])
     att_diff = 15.0	# Attenuation when start using the diffuse reverberation model [dB]
     att_max = 60.0 # Attenuation at the end of the simulation [dB]
     fs=16000.0 # Sampling frequency [Hz]
     abs_weights = [0.9]*5+[0.5] # Absortion coefficient ratios of the walls
     #print(room_sz, pos_rcv, pos_src)
-    #beta = gpuRIR.beta_SabineEstimation(room_sz, T60, abs_weights=abs_weights) # Reflection coefficients
-    beta = gpuRIR.beta_SabineEstimation(room_sz, T60)
+    beta = gpuRIR.beta_SabineEstimation(room_sz, T60, abs_weights=abs_weights) # Reflection coefficients
+    #beta = gpuRIR.beta_SabineEstimation(room_sz, T60)
     Tdiff= gpuRIR.att2t_SabineEstimator(att_diff, T60) # Time to start the diffuse reverberation model [s]
     Tmax = gpuRIR.att2t_SabineEstimator(att_max, T60)	 # Time to stop the simulation [s]
     nb_img = gpuRIR.t2n( Tdiff, room_sz )	# Number of image sources in each dimension
@@ -222,28 +221,58 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
       if target_pad < 0:
         target_pad = 0
       tfm1.pad(start_duration = target_pad, end_duration = target_length + 0.1)
-    tfm1.trim(0, target_length)
     tfm1.norm(-0.1)
+    tfm1.trim(0, target_length)
     tfm1.build_file(input_array=array_out1, sample_rate_in=sample_rate, output_filepath='/tmp/sample.wav')
     
     if random.random() < noise_percent:    
       noise_length = sox.file_info.duration(noise_wav)
-      if noise_length > target_length:
-        offset = (noise_length - target_length) * random.random()
+      if noise_length > target_length + 0.2:
+        offset = (noise_length - (target_length + 0.2)) * random.random()
       else:
         print("Noise file to short for target length")
       tfm2 = sox.Transformer()
       tfm2.clear_effects()
-      tfm2.trim(offset, target_length + offset)
-      tfm2.pad(0.01)
-      tfm2.norm(-0.1)
-      tfm2.build_file(noise_wav, '/tmp/noise.wav')
+      tfm2.trim(offset, target_length + offset + 0.2)
+      tfm2.norm(-2)
+      rand_effect = random.random()
+      if rand_effect < 0.33:
+        pitch = random.randrange(int(cfg['pitch']['n_semitones_min']), int(cfg['pitch']['n_semitones_max'])) / 1000
+        tfm2.pitch(n_semitones=pitch)
+      
+
+      elif rand_effect < 0.66:
+        tempo = random.randrange(int(cfg['tempo']['factor_min']), int(cfg['tempo']['factor_max'])) / 1000
+        tfm2.tempo(factor=tempo, audio_type='s')
+      
+
+      elif rand_effect < 1:
+        speed = random.randrange(int(cfg['speed']['factor_min']), int(cfg['speed']['factor_max'])) / 1000
+        tfm2.speed(factor=speed)
+      
+
+      rand_effect = random.random()
+      if rand_effect < 0.5:
+        gain = random.randrange(int(cfg['treble']['gain_min']), int(cfg['treble']['gain_max'])) / 1000
+        freq = random.randrange(int(cfg['treble']['freq_min']), int(cfg['treble']['freq_max'])) / 10
+        slope = random.randrange(int(cfg['treble']['slope_min']), int(cfg['treble']['slope_max'])) / 1000
+        tfm2.treble(gain_db=gain, frequency=freq, slope=slope)
+      
+
+      rand_effect = random.random()
+      if rand_effect < 0.5:
+        gain = random.randrange(int(cfg['bass']['gain_min']), int(cfg['bass']['gain_max'])) / 1000
+        freq = random.randrange(int(cfg['bass']['freq_min']), int(cfg['bass']['freq_max'])) / 100
+        slope = random.randrange(int(cfg['bass']['slope_min']), int(cfg['bass']['slope_max'])) / 1000
+        tfm2.bass(gain_db=gain, frequency=freq, slope=slope)
+       
+        tfm2.build_file(noise_wav, '/tmp/noise.wav')
       
       source_type = random.random()
       if source_type < 0.25:
           #stereo
           nb_src = 2
-          sourceheight = rheight - rheight * (random.randint(30, 90) / 100) 
+          sourceheight = rheight - rheight * (random.randint(300, 900) / 1000) 
           pos_src = np.array([[rwidth * 0.25,0.3,sourceheight],[rwidth * 0.75,0.3,sourceheight]])
           spkr_pattern = "card"
           orV_src = np.array([[0,1,0], [0,1,0]])
@@ -257,21 +286,21 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
       elif source_type < 0.75:
           #radio
           nb_src = 1
-          sourceheight = rheight - rheight * (random.randint(30, 90) / 100)    
+          sourceheight = rheight - rheight * (random.randint(300, 900) / 1000)    
           pos_src = np.array([[rwidth * random.random(),rlength * random.random(),sourceheight]])
           spkr_pattern = "omni"
           orV_src = None
       else:
           #appliance
           nb_src = 1
-          sourceheight = rheight - rheight * (random.randint(1, 70) / 100)
+          sourceheight = rheight - rheight * (random.randint(10, 700) / 1000)
           pos_src = np.array([[rwidth * random.random(),rlength * random.random(),sourceheight]])
           spkr_pattern = "omni"
           orV_src = None
           
       #print(room_sz, pos_rcv, pos_src)
-      #beta = gpuRIR.beta_SabineEstimation(room_sz, T60, abs_weights=abs_weights) # Reflection coefficients
-      beta = gpuRIR.beta_SabineEstimation(room_sz, T60)
+      beta = gpuRIR.beta_SabineEstimation(room_sz, T60, abs_weights=abs_weights) # Reflection coefficients
+      #beta = gpuRIR.beta_SabineEstimation(room_sz, T60)
       Tdiff= gpuRIR.att2t_SabineEstimator(att_diff, T60) # Time to start the diffuse reverberation model [s]
       Tmax = gpuRIR.att2t_SabineEstimator(att_max, T60)	 # Time to stop the simulation [s]
       nb_img = gpuRIR.t2n( Tdiff, room_sz )	# Number of image sources in each dimension
@@ -297,9 +326,8 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
           wavfile.write('/tmp/noise.wav', sample_rate_audio, convolved_audio_int)
             
            
-      noise_length = sox.file_info.duration('/tmp/noise.wav')
       tfm2.clear_effects()
-      tfm2.trim(0.01, target_length + 0.01)
+      tfm2.trim(0.1, target_length + 0.1)
       tfm2.norm(-0.1)
       tfm2.build_file(noise_wav, '/tmp/noise.wav')      
            
@@ -313,7 +341,6 @@ def augment_wav(wav, dest_dir, cfg, sample_rate, target_length, noise_wav, noise
     else:
       tfm1.clear_effects()
       wav_vol = 1.0 - ((1.0 - min_vol) * random.random())
-      tfm1.norm(-0.1)
       tfm1.vol(wav_vol)
       out = os.path.splitext(wav)[0] + '-tfm-' + str_effect + '.wav'
       out = dest_dir + "/" + shortuuid.uuid() + os.path.basename(out)
