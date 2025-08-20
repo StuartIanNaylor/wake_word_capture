@@ -7,4 +7,5 @@ python trim.py --source_dir /media/stuart/data1/coqui-ai-TTS/voices-df --dest_di
 
 python trim.py --source_dir /home/stuart/coqui-ai-TTS/computer --dest_dir /home/stuart/coqui-ai-TTS/computer-trim --start_length .7 --end_length 1.0 --tries 5
 ```
-
+Noise files
+https://drive.google.com/file/d/1tY6qkLSTz3cdOnYRuBxwIM5vj-w4yTuH/view?usp=drive_link
