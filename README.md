@@ -66,7 +66,7 @@ source ./venv/bin/activate
 pip3 install --upgrade pip
 pip install tensorflow==2.11.0 sounddevice numpy==1.26.4 scipy
 ```
-
+`python3 -m pip install 'tensorflow[and-cuda]'` to install with cuda
 `python3 kws-stream-avg.py -l` to list devices.
 `python kws-stream-avg.py --help` to show params
 `python kws-stream-avg.py --device 0 --kw_length 1.0 --kw_index 0` for current model and the vlevel pcm is idx 0 (change to whatever `python3 kws-stream-avg.py -l` lists)
