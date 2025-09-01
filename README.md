@@ -1,13 +1,13 @@
 # wake_word_capture
 TF wake_word_capture
 
-You will have to use tensorflow than TFLite as dunno if flexops has been dropped but its a struggle to find out how to compile the pip package with flex ops.
-used to be easy but latest documentation has be using full TF until I do a model with the MFCC frontend outside of the model.
-I used to like it included in the model and use the flex ops delegate but dunno if that has been dropped its still in the tf.lite method of the full tensorflow package.
+You will have to use tensorflow than TFLite as dunno if flexops has been dropped but its a struggle to find out how to compile the pip package with flex ops.  
+used to be easy but latest documentation has be using full TF until I do a model with the MFCC frontend outside of the model.  
+I used to like it included in the model and use the flex ops delegate but dunno if that has been dropped its still in the tf.lite method of the full tensorflow package.  
 
-The model expects a AGC feed and many microphone volumes are poor I use vlevel
-https://github.com/radiocicletta/vlevel
-very easy just
+The model expects a AGC feed and many microphone volumes are poor I use vlevel  
+https://github.com/radiocicletta/vlevel  
+very easy just  
 ```
 make
 sudo make install
@@ -30,12 +30,12 @@ pcm.vlevel {
 0.8 = strength
 20 = max multiply
 ```
-https://github.com/radiocicletta/vlevel/blob/master/docs/technical.txt goes into the internals if curious
-Really the input should be post filtering of something like https://github.com/SaneBow/PiDTLN
-Still though filtering can attenuate in expects 0.7 to 1 for optimum input tolerance so a 2 stage AGC can be beneficial of running vlevel twice
+https://github.com/radiocicletta/vlevel/blob/master/docs/technical.txt goes into the internals if curious  
+Really the input should be post filtering of something like https://github.com/SaneBow/PiDTLN  
+Still though filtering can attenuate in expects 0.7 to 1 for optimum input tolerance so a 2 stage AGC can be beneficial of running vlevel twice  
 
-use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10
-great simple util for changing python version
+use pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#installation to get python 3.10  
+great simple util for changing python version  
 ```
 pyenv install -list
 pyenv install 3.10.18
@@ -44,18 +44,18 @@ python --version #to test
 pyenv global system #to switch back to system python version
 pyenv versions #to view installed versions
 ```
-take a while as will compile python 3.10.18 but just me I like the native compile version to be avail under pyenv
-helps if you install https://github.com/StuartIanNaylor/zram-swap-config and increase your dphys swap file to stop a OOM but on a Pizero2 eventually...
-can not remember if you need to install libs
+take a while as will compile python 3.10.18 but just me I like the native compile version to be avail under pyenv  
+helps if you install https://github.com/StuartIanNaylor/zram-swap-config and increase your dphys swap file to stop a OOM but on a Pizero2 eventually...  
+can not remember if you need to install libs  
 ```
 sudo apt install build-essential zlib1g-dev  libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev curl \
 autotools-dev autoconf libtool pkg-config cmake python3-setuptools python3-wheel libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev tk-dev \
 libportaudio2
 ```
-Likely but any version of TF should run if used with the correct version of numpy the 1. version of numpy was used but latter use the later 2. version
-These instructions are just the same to run and create models via https://github.com/google-research/google-research/tree/1d49f2c0d5506a6e11115726164d42f6b7b7b95a/kws_streaming
-Which I have had problems not being to run much past that commit or anything later than pip install tensorflow==2.11.1 but cloning to that branch works as how we got these models.
-Its a shame as it just creates a hurdle but once you know to checkout that commit and that version of tensorflow than what are now lost in time tf_nightly refernces its a great framework to test basic models.
+Likely but any version of TF should run if used with the correct version of numpy the 1. version of numpy was used but latter use the later 2. version  
+These instructions are just the same to run and create models via https://github.com/google-research/google-research/tree/1d49f2c0d5506a6e11115726164d42f6b7b7b95a/kws_streaming  
+Which I have had problems not being to run much past that commit or anything later than pip install tensorflow==2.11.1 but cloning to that branch works as how we got these models.  
+Its a shame as it just creates a hurdle but once you know to checkout that commit and that version of tensorflow than what are now lost in time tf_nightly refernces its a great framework to test basic models.  
 The python/tf version and pyenv are only really needed if you want to try creating models
 
 ```
@@ -66,10 +66,10 @@ source ./venv/bin/activate
 pip3 install --upgrade pip
 pip install tensorflow==2.11.0 sounddevice numpy==1.26.4 scipy
 ```
-`python3 -m pip install 'tensorflow[and-cuda]'` to install with cuda
-`python3 kws-stream-avg.py -l` to list devices.
-`python kws-stream-avg.py --help` to show params
-`python kws-stream-avg.py --device 0 --kw_length 1.0 --kw_index 0` for current model and the vlevel pcm is idx 0 (change to whatever `python3 kws-stream-avg.py -l` lists)
+`python3 -m pip install 'tensorflow[and-cuda]'` to install with cuda  
+`python3 kws-stream-avg.py -l` to list devices.  
+`python kws-stream-avg.py --help` to show params  
+`python kws-stream-avg.py --device 0 --kw_length 1.0 --kw_index 0` for current model and the vlevel pcm is idx 0 (change to whatever `python3 kws-stream-avg.py -l` lists)  
 You might get a buffer under run as the full TF package loads just ignore but runtime is much lighter.
 
 
