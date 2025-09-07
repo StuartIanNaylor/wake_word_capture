@@ -7,7 +7,7 @@ unk3
 noise  
 Total params: 469,057
 ```
-python benchmark_clean.py --model_path ../5-class-model/1-5un-model/stream_state_external_quant.tflite --kw_index 0 --kw_sensitivity 0.4
+python benchmark_clean.py --model_path ../5-class-model/1-5un-model/stream_state_external_quant.tflite 
 
-12-Fails
+22-Fails
 ```
