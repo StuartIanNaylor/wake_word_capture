@@ -87,7 +87,7 @@ mkdir gkws
 cd gkws
 git clone https://github.com/google-research/google-research.git
 cd google-research
-git checkout git checkout fa08dcc009c73c516400dc32e13147b14196becc
+git checkout fa08dcc009c73c516400dc32e13147b14196becc
 ```
 instructions are at https://github.com/google-research/google-research/blob/master/kws_streaming/experiments/kws_experiments_quantized_12_labels.md but here is my setup
 ```
